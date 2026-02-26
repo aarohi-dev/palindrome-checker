@@ -1,79 +1,71 @@
-class Node {
-    char data;
-    Node next;
+/**
+ * =========================================================
+ * MAIN CLASS - UseCase9PalindromeCheckerApp
+ * =========================================================
+ *
+ * Use Case 9 : Recursive Palindrome Checker
+ *
+ * Description:
+ * This class validates a palindrome using recursion.
+ *
+ * Characters are compared from the outer positions
+ * moving inward using recursive calls.
+ *
+ * The recursion stops when:
+ * - All characters are matched, or
+ * - A mismatch is found.
+ *
+ * This use case demonstrates divide-and-conquer
+ * logic using method recursion.
+ *
+ * @author Developer
+ * @version 1.0
+ */
 
-    Node(char data) {
-        this.data = data;
-        this.next = null;
-    }
-}
+import java.util.Scanner;
 
 public class PalindromeCheckerApp1{
 
-    // Convert string to linked list
-    static Node createList(String str) {
-        Node head = new Node(str.charAt(0));
-        Node current = head;
-
-        for (int i = 1; i < str.length(); i++) {
-            current.next = new Node(str.charAt(i));
-            current = current.next;
-        }
-        return head;
-    }
-
-    // Reverse linked list
-    static Node reverse(Node head) {
-        Node prev = null;
-        Node current = head;
-        Node next = null;
-
-        while (current != null) {
-            next = current.next;
-            current.next = prev;
-            prev = current;
-            current = next;
-        }
-        return prev;
-    }
-
-    // Check palindrome
-    static boolean isPalindrome(Node head) {
-        if (head == null || head.next == null)
-            return true;
-
-        Node slow = head;
-        Node fast = head;
-
-        // Find middle
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-
-        // Reverse second half
-        Node secondHalf = reverse(slow);
-        Node firstHalf = head;
-
-        // Compare halves
-        while (secondHalf != null) {
-            if (firstHalf.data != secondHalf.data)
-                return false;
-
-            firstHalf = firstHalf.next;
-            secondHalf = secondHalf.next;
-        }
-
-        return true;
-    }
-
+    /**
+     * Application entry point for UC9.
+     *
+     * @param args Command-line arguments
+     */
     public static void main(String[] args) {
-        String str = "madam";
-        Node head = createList(str);
 
-        if (isPalindrome(head))
-            System.out.println("Palindrome");
-        else
-            System.out.println("Not Palindrome");
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Input : ");
+        String input = scanner.nextLine();
+
+        boolean result = check(input, 0, input.length() - 1);
+
+        System.out.println("Is Palindrome? : " + result);
+
+        scanner.close();
+    }
+
+    /**
+     * Recursively checks whether a string is palindrome.
+     *
+     * @param s     Input string
+     * @param start Starting index
+     * @param end   Ending index
+     * @return true if palindrome, otherwise false
+     */
+    private static boolean check(String s, int start, int end) {
+
+        // Base Condition 1: All characters checked
+        if (start >= end) {
+            return true;
+        }
+
+        // Base Condition 2: Mismatch found
+        if (s.charAt(start) != s.charAt(end)) {
+            return false;
+        }
+
+        // Recursive call (move inward)
+        return check(s, start + 1, end - 1);
     }
 }
