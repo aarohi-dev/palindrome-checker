@@ -1,13 +1,30 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+public class PalindromeCheckerApp1 {
+    public static void main(String[] args){
+        System.out.println("Welcome to the Palindrome Checker app !");
+        System.out.println("Version : 1.0");
+        System.out.println("System initialized successfully");
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+        String input = "madam";
+        boolean isPalindrome = true;
+        System.out.println("Input text: " + input);
+
+        int length = input.length();
+        for (int i = 0; i < input.length() / 2; i++){
+            if (input.charAt(i) != input.charAt(length - 1 - i)){
+                isPalindrome = false;
+                break;
+            }
+        }
+        System.out.println("Is it a Palindrome? :" + isPalindrome);
+
+        StringBuilder reversed = new StringBuilder();
+        for(int i = input.length() - 1; i >= 0; i--){
+            reversed.append(input.charAt(i));
+        }
+
+        System.out.println("original: " + input);
+        System.out.println("Reversed: " + reversed);
+
+
     }
 }
